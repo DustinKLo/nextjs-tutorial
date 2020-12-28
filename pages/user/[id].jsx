@@ -1,25 +1,19 @@
 import { Fragment, useState, useEffect } from "react";
-
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 import Layout from "../../components/layout";
 
 const url = "https://jsonplaceholder.typicode.com/users";
 
 const UserProfile = (props) => {
-  const router = useRouter();
-  const { query } = router;
+  const { id } = props;
 
   const [user, getUser] = useState({});
   useEffect(() => {
-    if (query.id)
-      fetch(`${url}/${query.id}`)
-        .then((res) => res.json())
-        .then((d) => getUser(d));
-  }, [router]);
-
-  // const { id, user } = props;
+    fetch(`${url}/${id}`)
+      .then((res) => res.json())
+      .then((d) => getUser(d));
+  }, []);
 
   return (
     <Fragment>
